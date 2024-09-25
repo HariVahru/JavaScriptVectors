@@ -4,7 +4,7 @@ import React from 'react';
 const toRadians = (degrees) => (degrees * Math.PI) / 180;
 
 //Create an arrow function with parameters of all the data we need to create a visualization of the Vector Danik has created
-const VectorDrawing = ({ vectors }) => {
+const VectorDrawing = ({vectors}) => {
     //We define the starting point of an svg box (its center)
     const startX = 250;
     const startY = 250;
@@ -13,9 +13,15 @@ const VectorDrawing = ({ vectors }) => {
         <svg width="500" height="500" style={{ border: '1px solid black' }}>
             {vectors.map((vector, index) => {
                 {/* svg has component line with all these parameters in it to create the line itself */ }
-                console.log (vector.x + "    "+vector.y)
-                //getting every single one of the properties from the vecor object
-                const { value, theta, x, y } = vector;
+                
+                console.log (vector.getX() + "    "+vector.getY()) // Now using getters to get the values rather than using JSON attributes
+                //getting every single one of the properties from the vector object
+                
+                // This has now been split to use getters as vector object are now vectors instead of JSON representation
+                const value = vector.getValue()
+                const theta = vector.getTheta()
+                const x = vector.getX()
+                const y = vector.getY()
                 
 
                 // Check if the vector has valid data
