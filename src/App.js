@@ -14,27 +14,46 @@ function App() {
     value: null,
   });
 
+  const [vectorData2, setVectorData2] = useState({
+    x: null,
+    y: null,
+    rad: null,
+    theta: null,
+    value: null,
+  });
+
+  const vectors = [
+    {...vectorData},
+    {...vectorData2},
+  ]
+
 
   const runTest = () =>
   {
-    let v = new Vector2(50,105);
-    console.log(v.getValue())
-    console.log(v.getTheta())
-    console.log(v.getRad())
-    console.log(v.getX())
-    console.log(v.getY())
+    let v1 = new Vector2(150,0);
+    let v2 = new Vector2(100,90);
+    
     setVectorData({
-      x: v.getX(),
-      y: v.getY(),
-      rad: v.getRad(),
-      theta: v.getTheta(),
-      value: v.getValue(),
+      x: v1.getX(),
+      y: v1.getY(),
+      rad: v1.getRad(),
+      theta: v1.getTheta(),
+      value: v1.getValue(),
     });
+
+    setVectorData2({
+      x: v2.getX(),
+      y: v2.getY(),
+      rad: v2.getRad(),
+      theta: v2.getTheta(),
+      value: v2.getValue(),
+    });
+
   }
 
   return (
     <div className="App">
-      <VectorDrawing value={vectorData.value} theta={vectorData.theta} rad={vectorData.rad} x={vectorData.x} y={vectorData.y}/>
+      <VectorDrawing vectors={vectors}/>
       <button onClick={() => runTest()} >Run test</button>
     </div>
   );
