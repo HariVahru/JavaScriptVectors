@@ -40,3 +40,5 @@ class Point
         return this.#y
     }
 }
+
+export default Point
