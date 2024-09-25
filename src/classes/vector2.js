@@ -54,6 +54,7 @@ class Vector2
         {
             this.#value = 1
         }
+        this.componentCalculator()
     }
 
     setTheta (theta)
@@ -67,7 +68,7 @@ class Vector2
         {
             this.#theta = 360 + (theta % 360)
         }
-        
+        this.componentCalculator()
     }
 
     getValue()
