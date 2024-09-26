@@ -95,6 +95,39 @@ class Vector2
     {
         return this.#y
     }
+
+    // Adding static method which can add two vectors
+    static addVectors(v1, v2)
+    {
+        // work out new x and y
+        let newX = v1.getX() + v2.getX()
+        let newY = v1.getY() + v2.getY()
+
+
+        // work out new value 
+        let newValue = Math.sqrt(Math.pow(newX,2)+Math.pow(newY,2))
+
+        // work out new theta
+        let newRad;
+        if (newX >= 0 && newY >= 0)
+        {
+            newRad = Math.asin(newX / newValue)
+        }
+        else if (newX >= 0 && newY < 0)
+        {
+            newRad = Math.abs(Math.asin(newY / newValue)) + (0.5 * Math.PI)
+        }
+        else if (newX < 0 && newY < 0)
+        {
+            newRad = Math.abs(Math.asin(newX / newValue)) + (Math.PI)
+        }
+        else if (newX < 0 && newY >= 0)
+        {
+            newRad = Math.abs(Math.asin(newY / newValue)) + (1.5 * Math.PI)
+        }
+        let newTheta = newRad * 180 / Math.PI
+        return new Vector2(newValue,newTheta)
+    }
 }
 
 export default Vector2
