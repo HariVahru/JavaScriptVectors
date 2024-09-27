@@ -12,7 +12,7 @@ const ShapeDrawing = ({ shapes }) => {
                     return (
                         //React fragment is a thing that basically allows the line to be stacked on top of one another allowing us no need to create a new div for every line 
                         <React.Fragment key={index}>
-                            {shape.drawBall()}
+                            {shape.reDraw()}
                         </React.Fragment>
                     )
                 })};

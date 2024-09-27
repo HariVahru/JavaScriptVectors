@@ -14,7 +14,7 @@ const VectorDrawing = ({ shapes }) => {
                 return (
                     <React.Fragment key={shapeIndex}>
                         {shape.getVectors().map((vector, vectorIndex) => {
-                            console.log(shapeX + "    " + shapeY); // Now using getters to get the values rather than using JSON attributes
+                             // Now using getters to get the values rather than using JSON attributes
 
                             // Getting every single one of the properties from the vector object
                             const x = vector.getX();

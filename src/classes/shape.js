@@ -1,43 +1,30 @@
 import Point from "./point";
+import Velocity from "./velocity";
 class Shape
 {
     #origin;
-    #vectors;
+    #velocity;
 
     constructor()
     {
         this.#origin = new Point(0,0)
-        this.#vectors = []
+        this.#velocity = new Velocity(0,0)
     }
 
-    getVectors()
+    // We will assume engine with 10 ticks per second 
+    moveShape(tick)
     {
-        return this.#vectors
+        this.setPosition(this.getPosition().getX()+((this.getVelocity().getX()*tick)/10), this.getPosition().getY()+((this.getVelocity().getY()*tick)/10))
     }
 
-    addVector(newVector)
+    setVelocity(velocity)
     {
-        this.#vectors.push(newVector)
+        this.#velocity = velocity
     }
 
-    addVectors(vectorArray)
+    getVelocity()
     {
-        vectorArray.forEach((element) => {
-            this.#vectors.push(element)
-        })
-    }
-
-    removeVector(vector)
-    {
-        let newVectors = []
-        this.#vectors.forEach((element) =>
-        {
-            if (element != vector)
-            {
-                newVectors.push(element)
-            }
-        })
-        this.#vectors = newVectors;
+        return this.#velocity
     }
 
     // If two points given then set them as position
@@ -58,6 +45,41 @@ class Shape
     {
         return this.#origin
     }
+
+    getVectors()
+    {
+        return [this.#velocity]
+    }
+
+    // Old features
+
+    // - Removed as all vectors will have a purpose and will be each be a unique class
+    // addVector(newVector)
+    // {
+    //     this.#vectors.push(newVector)
+    // }
+
+    // addVectors(vectorArray)
+    // {
+    //     vectorArray.forEach((element) => {
+    //         this.#vectors.push(element)
+    //     })
+    // }
+
+    // removeVector(vector)
+    // {
+    //     let newVectors = []
+    //     this.#vectors.forEach((element) =>
+    //     {
+    //         if (element != vector)
+    //         {
+    //             newVectors.push(element)
+    //         }
+    //     })
+    //     this.#vectors = newVectors;
+    // }
+
+
 }
 
 export default Shape

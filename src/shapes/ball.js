@@ -10,7 +10,7 @@ class Ball extends Shape{
         this.#ballRadius = ballRadius
     }
  
-    drawBall()
+    reDraw()
     {
         return(<circle cx={this.getPosition().getX()} cy={this.getPosition().getY()} r={this.#ballRadius} stroke="red" fill="red" />);
     }
