@@ -1,20 +1,48 @@
+import Acceleration from "./acceleration";
 import Point from "./point";
 import Velocity from "./velocity";
+import Vector2 from "./vector2";
 class Shape
 {
     #origin;
     #velocity;
+    #acceleration;
 
     constructor()
     {
         this.#origin = new Point(0,0)
         this.#velocity = new Velocity(0,0)
+        this.#acceleration = new Acceleration(0,0)
     }
 
-    // We will assume engine with 10 ticks per second 
+    applyAcceleration(tick)
+    {
+        // Copy the acceleration by creating a new one, so as to not reference the actual one
+        let acceleration = new Acceleration(this.getAcceleration().getValue(),this.getAcceleration().getTheta())
+
+        // Ofset the value by 50 because engine doing 50 ticks per second and multiply by the tick speed
+        let newValue = acceleration.getValue()*tick/50
+        acceleration.setValue(newValue)
+
+        // Apply the acceleration to the velocity of the object
+        this.#velocity = Vector2.addVectors(this.getVelocity(),acceleration)
+    }
+
+    setAcceleration(acceleration)
+    {
+        this.#acceleration = acceleration
+    }
+
+    getAcceleration()
+    {
+        return this.#acceleration
+    }
+
+    // We will assume engine with 50 ticks per second 
     moveShape(tick)
     {
-        this.setPosition(this.getPosition().getX()+((this.getVelocity().getX()*tick)/10), this.getPosition().getY()+((this.getVelocity().getY()*tick)/10))
+        // Add the velocity to the position to get new position, however take into account 50 ticks per second and tickspeed
+        this.setPosition(this.getPosition().getX()+((this.getVelocity().getX()*tick)/50), this.getPosition().getY()+((this.getVelocity().getY()*tick)/50))
     }
 
     setVelocity(velocity)
@@ -48,7 +76,7 @@ class Shape
 
     getVectors()
     {
-        return [this.#velocity]
+        return [this.#velocity,this.#acceleration]
     }
 
     // Old features

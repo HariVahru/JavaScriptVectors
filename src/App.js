@@ -9,6 +9,7 @@ import Ball from './shapes/ball';
 import ShapeDrawing from './drawControllers/ShapeDrawing';
 import Velocity from './classes/velocity';
 import Engine from './controller/engine';
+import Acceleration from './classes/acceleration';
 
 function App() {
 
@@ -22,9 +23,15 @@ function App() {
   const runTest = () =>
   {
     let circle1= new Ball(90)
-    circle1.setPosition(5, 0)
-    circle1.setVelocity(new Velocity(10,330))
-    setShapes([circle1])
+    circle1.setPosition(100, 0)
+    circle1.setVelocity(new Velocity(30,340))
+    circle1.setAcceleration(new Acceleration(1.5,180))
+
+    let circle2= new Ball(90)
+    circle2.setPosition(-200, -400)
+    circle2.setVelocity(new Velocity(30,45))
+    circle2.setAcceleration(new Acceleration(1.5,270))
+    setShapes([circle1,circle2])
     
   }
 
