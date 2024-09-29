@@ -1,0 +1,34 @@
+
+.Object_Creator
+{
+    width:10vw;
+    border-width: 1px;
+    border-style:solid;
+    border-radius: 20px;
+    padding: 1%;
+    background-color: #ffffff;
+}
+
+.Creator_Inputs
+{
+    display: flex;
+    flex-direction: column;
+}
+
+.Creator_Input
+{
+    width:100%
+}
+
+.Creator_Inputs button
+{
+    margin-top:4%;
+    background:    #134f5c;
+    background:    linear-gradient(#134f5c, #38761d);
+    border-radius: 11px;
+    padding:       5px 10px;
+    color:         #ffffff;
+    display:       inline-block;
+    font:          normal bold 12px/1 "Ubuntu", sans-serif;
+    text-align:    center;
+}

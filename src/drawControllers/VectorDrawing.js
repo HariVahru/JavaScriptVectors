@@ -23,20 +23,23 @@ const VectorDrawing = ({ shapes }) => {
                             const endX = shapeX + x;
                             const endY = shapeY + y;
 
-                            return (
-                                // React fragment is a thing that basically allows the line to be stacked on top of one another allowing us no need to create a new div for every line 
-                                <React.Fragment key={vectorIndex}>
-                                    <line
-                                        x1={shapeX}
-                                        y1={shapeY}
-                                        x2={endX}
-                                        y2={endY}
-                                        stroke='blue'
-                                        strokeWidth="2"
-                                        markerEnd="url(#arrowhead)"
-                                    />
-                                </React.Fragment>
-                            );
+                            if (vector.getValue() > 0)
+                            {
+                                return (
+                                    // React fragment is a thing that basically allows the line to be stacked on top of one another allowing us no need to create a new div for every line 
+                                    <React.Fragment key={vectorIndex}>
+                                        <line
+                                            x1={shapeX}
+                                            y1={shapeY}
+                                            x2={endX}
+                                            y2={endY}
+                                            stroke='blue'
+                                            strokeWidth="2"
+                                            markerEnd="url(#arrowhead)"
+                                        />
+                                    </React.Fragment>
+                                );
+                            }
                         })}
                     </React.Fragment>
                 );

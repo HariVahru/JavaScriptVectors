@@ -7,7 +7,24 @@ class Ball extends Shape{
     constructor(ballRadius)
     {
         super();
-        this.#ballRadius = ballRadius
+        this.setRadius(ballRadius)
+    }
+
+    setRadius(radius)
+    {
+        if (radius > 0)
+        {
+            this.#ballRadius = radius
+        }
+        else
+        {
+            this.#ballRadius = 1
+        }
+    }
+
+    getRadius()
+    {
+        return this.#ballRadius
     }
  
     reDraw()

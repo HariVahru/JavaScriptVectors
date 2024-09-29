@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 
-function Engine({objects,setObjects,engineRunning,tickSpeed}) {
+function Engine({objects,setObjects,engineRunning,tickSpeed,singleTick}) {
 
     // This is used to setup the interval when the engine is running
     const [running,setRunning] = useState(null)
@@ -18,6 +18,11 @@ function Engine({objects,setObjects,engineRunning,tickSpeed}) {
             clearInterval(running)
         }
     },[engineRunning])
+
+    React.useEffect( () => 
+    {
+        mainController()
+    },[singleTick])
 
     // This is called by the interval to complete one tick
     const mainController = () => 

@@ -17,15 +17,19 @@ class Shape
 
     applyAcceleration(tick)
     {
-        // Copy the acceleration by creating a new one, so as to not reference the actual one
-        let acceleration = new Acceleration(this.getAcceleration().getValue(),this.getAcceleration().getTheta())
+        // Same as with moveShape need to check that the value of the acceleration is more than 0
+        if (this.getAcceleration().getValue() > 0)
+        {
+            // Copy the acceleration by creating a new one, so as to not reference the actual one
+            let acceleration = new Acceleration(this.getAcceleration().getValue(),this.getAcceleration().getTheta())
 
-        // Ofset the value by 50 because engine doing 50 ticks per second and multiply by the tick speed
-        let newValue = acceleration.getValue()*tick/50
-        acceleration.setValue(newValue)
+            // Ofset the value by 50 because engine doing 50 ticks per second and multiply by the tick speed
+            let newValue = acceleration.getValue()*tick/50
+            acceleration.setValue(newValue)
 
-        // Apply the acceleration to the velocity of the object
-        this.#velocity = Vector2.addVectors(this.getVelocity(),acceleration)
+            // Apply the acceleration to the velocity of the object
+            this.#velocity = Vector2.addVectors(this.getVelocity(),acceleration)
+        }
     }
 
     setAcceleration(acceleration)
@@ -41,8 +45,12 @@ class Shape
     // We will assume engine with 50 ticks per second 
     moveShape(tick)
     {
-        // Add the velocity to the position to get new position, however take into account 50 ticks per second and tickspeed
-        this.setPosition(this.getPosition().getX()+((this.getVelocity().getX()*tick)/50), this.getPosition().getY()+((this.getVelocity().getY()*tick)/50))
+        // Need to check that the update needs to happen, for this value of the velocity needs to be more than 0
+        if (this.getVelocity().getValue() > 0)
+        {
+            // Add the velocity to the position to get new position, however take into account 50 ticks per second and tickspeed
+            this.setPosition(this.getPosition().getX()+((this.getVelocity().getX()*tick)/50), this.getPosition().getY()+((this.getVelocity().getY()*tick)/50))
+        }
     }
 
     setVelocity(velocity)
