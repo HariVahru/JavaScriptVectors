@@ -45,8 +45,8 @@ class Vector2
 
     setValue (value)
     {
-        // If the value of the vector is set to 0 or anything below, it will default to 1
-        if (value > 0)
+        // If the value of the vector is set to anything below 0, it will default to 1
+        if (value >= 0)
         {
             this.#value = value
         }
