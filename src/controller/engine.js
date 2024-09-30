@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 
-function Engine({objects,setObjects,engineRunning,tickSpeed,singleTick}) {
+function Engine({objects,setObjects,engineRunning,tickSpeed,singleTick,updater}) {
 
     // This is used to setup the interval when the engine is running
     const [running,setRunning] = useState(null)
@@ -29,6 +29,11 @@ function Engine({objects,setObjects,engineRunning,tickSpeed,singleTick}) {
     {
         controllerAcceleration()
         controllerVelocity()
+
+        // Use the updater to call the update inside each tracker to update the values in the window
+        updater.forEach(caller => {
+            caller(value => !value)
+        });
     }
 
     // Acceleration is called before velocity to find the new velocity before it is applied

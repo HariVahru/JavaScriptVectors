@@ -14,13 +14,22 @@ import ObjectCreator from './controller/objectCreator';
 
 function App() {
 
+  // This is an array which holds all shapes which are to be ticked by the engine
   const [shapes, setShapes]= useState([])
-  const [runTick,setRunTick] = useState(false)
+
+  // This is a state that is used by the engine to call an update on the tracker windows
+  const [windowUpdater, setWindowUpdater] = useState([])
 
   // New controll variables for the engine
+
+  // Tick speed will determine how many ticks will be perfomed per calculation ,increasing the tick speed will speed up or slow down simulation
   const [tickSpeed,setTickSpeed] = useState(1)
+  // Engine running bool determines if the engine will be ticking all registered objects
   const [engineRunning,setEngineRunning] = useState(false)
 
+
+  // This method allows to tick the engine once, the tick speed still applies
+  const [runTick,setRunTick] = useState(false)
   const moveTheCircle = () =>
   {
     setEngineRunning(value => !value)
@@ -29,8 +38,8 @@ function App() {
   return (
     <div className="App">
       <ShapeDrawing shapes={shapes}/>
-      <Engine objects={shapes} setObjects={setShapes} engineRunning={engineRunning} tickSpeed={tickSpeed} singleTick={runTick} />
-      <ObjectCreator objects={shapes} setObjects={setShapes} />
+      <Engine objects={shapes} setObjects={setShapes} engineRunning={engineRunning} tickSpeed={tickSpeed} singleTick={runTick} updater={windowUpdater} />
+      <ObjectCreator engineRunning={engineRunning} setEngineRunning={setEngineRunning} setObjects={setShapes} updater={windowUpdater} setUpdater={setWindowUpdater} />
       <button onClick={() => setRunTick(value => !value)} >Run test</button>
       <button onClick={() => moveTheCircle()} >Toggle Engine</button>
     </div>

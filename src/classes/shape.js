@@ -7,12 +7,27 @@ class Shape
     #origin;
     #velocity;
     #acceleration;
+    #id;
+    static #tracker = 0;
 
     constructor()
     {
         this.#origin = new Point(0,0)
         this.#velocity = new Velocity(0,0)
         this.#acceleration = new Acceleration(0,0)
+        this.#id = Shape.#getId()
+    }
+
+    getId()
+    {
+        return this.#id
+    }
+
+    static #getId()
+    {
+        let id = Shape.#tracker
+        Shape.#tracker += 1
+        return id
     }
 
     applyAcceleration(tick)

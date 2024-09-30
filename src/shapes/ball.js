@@ -1,4 +1,5 @@
 import Shape from "../classes/shape";
+import Velocity from "../classes/velocity";
 
 class Ball extends Shape{
  
@@ -8,6 +9,7 @@ class Ball extends Shape{
     {
         super();
         this.setRadius(ballRadius)
+        this.setVelocity(new Velocity(50,90))
     }
 
     setRadius(radius)
