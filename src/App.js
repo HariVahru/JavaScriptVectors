@@ -26,6 +26,8 @@ function App() {
   const [tickSpeed,setTickSpeed] = useState(1)
   // Engine running bool determines if the engine will be ticking all registered objects
   const [engineRunning,setEngineRunning] = useState(false)
+  const [runner, setRunner]=useState(null)
+
 
 
   // This method allows to tick the engine once, the tick speed still applies
@@ -38,8 +40,8 @@ function App() {
   return (
     <div className="App">
       <ShapeDrawing shapes={shapes}/>
-      <Engine objects={shapes} setObjects={setShapes} engineRunning={engineRunning} tickSpeed={tickSpeed} singleTick={runTick} updater={windowUpdater} />
-      <ObjectCreator engineRunning={engineRunning} setEngineRunning={setEngineRunning} setObjects={setShapes} updater={windowUpdater} setUpdater={setWindowUpdater} />
+      <Engine setRunner = {setRunner} objects={shapes} setObjects={setShapes} engineRunning={engineRunning} tickSpeed={tickSpeed} singleTick={runTick} updater={windowUpdater} />
+      <ObjectCreator engineRunning={engineRunning} setEngineRunning={runner} setObjects={setShapes} updater={windowUpdater} setUpdater={setWindowUpdater} />
       <button onClick={() => setRunTick(value => !value)} >Run test</button>
       <button onClick={() => moveTheCircle()} >Toggle Engine</button>
     </div>
