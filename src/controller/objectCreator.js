@@ -15,23 +15,24 @@ function ObjectCreator({engineRunning, setEngineRunning, setObjects, updater,set
     // State to display all object trackers 
     const [trackers,setTrackers] = useState([])
 
-    const stopEngine = async () =>
+    const stopEngine = async() =>
     {
         // When the creator is called the engine needs to be stopped for a second to let the new object to spawn
-        let engine = false
-        if (engineRunning)
-        {
-            // To make sure the engine is stopped we use await for the program to wait for engine to stop to spawn the new object
-            await setEngineRunning(value => !value)
-            engine = true
+        let engine = false;
+        if (engineRunning===true) {  
+            engine= true;
+            console.log(setEngineRunning.setRunning)
+            await setEngineRunning.setRunning(value=>!value)
         }
+
         // After we made sure engine is off, we can create new object
+        // setEngineRunning(value=>!value)
         createNew()
-        // If we have stopped engine, restart it
-        if (engine)
-        {
-            setEngineRunning(value => !value)
+        if(engine){
+            await setEngineRunning.setRunning(value=>!value)
         }
+        
+        
     }
 
     const createNew = () =>
