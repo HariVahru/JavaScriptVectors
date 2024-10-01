@@ -1,0 +1,12 @@
+
+.Object_Tracker
+{
+    width:12vw;
+    border-width: 1px;
+    border-style:solid;
+    font-size: 10px;
+    border-radius: 20px;
+    padding: 1%;
+    background-color: #ffffff;
+    position:absolute
+}
