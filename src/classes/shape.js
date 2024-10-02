@@ -1,5 +1,6 @@
 import Acceleration from "./acceleration";
 import Point from "./point";
+import Force from "./force";
 import Velocity from "./velocity";
 import Vector2 from "./vector2";
 class Shape
@@ -8,6 +9,8 @@ class Shape
     #velocity;
     #acceleration;
     #id;
+    #mass
+    #force;
     static #tracker = 0;
 
     constructor()
@@ -16,6 +19,7 @@ class Shape
         this.#velocity = new Velocity(0,0)
         this.#acceleration = new Acceleration(0,0)
         this.#id = Shape.#getId()
+        this.#force= new Force(0,0)
     }
 
     getId()
@@ -39,7 +43,7 @@ class Shape
             let acceleration = new Acceleration(this.getAcceleration().getValue(),this.getAcceleration().getTheta())
 
             // Ofset the value by 50 because engine doing 50 ticks per second and multiply by the tick speed
-            let newValue = acceleration.getValue()*tick/50
+            let newValue = acceleration.getValue()*tick/60
             acceleration.setValue(newValue)
 
             // Apply the acceleration to the velocity of the object
@@ -58,13 +62,13 @@ class Shape
     }
 
     // We will assume engine with 50 ticks per second 
-    moveShape(tick)
+    moveShape(tick, fps)
     {
         // Need to check that the update needs to happen, for this value of the velocity needs to be more than 0
         if (this.getVelocity().getValue() > 0)
         {
             // Add the velocity to the position to get new position, however take into account 50 ticks per second and tickspeed
-            this.setPosition(this.getPosition().getX()+((this.getVelocity().getX()*tick)/50), this.getPosition().getY()+((this.getVelocity().getY()*tick)/50))
+            this.setPosition(this.getPosition().getX()+((this.getVelocity().getX()*tick)/60), this.getPosition().getY()+((this.getVelocity().getY()*tick)/60))
         }
     }
 
@@ -92,6 +96,8 @@ class Shape
         }
     }
 
+    
+
     getPosition()
     {
         return this.#origin
@@ -99,7 +105,44 @@ class Shape
 
     getVectors()
     {
-        return [this.#velocity,this.#acceleration]
+        return [this.#velocity,this.#acceleration,this.#force]
+    }
+
+
+    setMass(mass)
+    {
+        this.#mass=mass;
+    }
+
+    getForce()
+    {
+        return this.#force
+    }
+
+    setForce(force)
+    {
+        this.#force=force
+    }
+
+    applyForce(tick) 
+    {
+  
+        let force = new Force(this.getForce().getValue(),this.getForce().getTheta())
+        let mass = this.#mass
+        if(mass==0){
+            mass=1;
+        }
+        let newForceValue = (force.getValue()/mass)*tick/60;
+        force.setValue(newForceValue);
+        // console.log(force)
+        let result = Vector2.addVectors(this.getVelocity(), force);
+        this.setVelocity(result);
+        // console.log(result);  // Check the structure of the result
+    }
+
+    applyImpulse()
+    {
+
     }
 
     // Old features

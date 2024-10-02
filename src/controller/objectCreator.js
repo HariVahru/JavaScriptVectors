@@ -11,6 +11,7 @@ function ObjectCreator({engineRunning, setEngineRunning, setObjects, updater,set
     const [radius,setRadius] = useState(0)
     const [xPos,setXPos] = useState(0)
     const [yPos,setYPos] = useState(0)
+    const [mass, setMass]= useState(0)
 
     // State to display all object trackers 
     const [trackers,setTrackers] = useState([])
@@ -41,14 +42,17 @@ function ObjectCreator({engineRunning, setEngineRunning, setObjects, updater,set
         let localRadius = Number(radius)
         let localX = Number(xPos)
         let localY = Number(yPos)
+        let localMass = Number(mass)
 
         // Check that all values given by the user were sucesfully converted, no NAN
-        if (typeof localRadius === "number" && typeof localX === "number" && typeof localY === "number")
+        if (typeof localRadius === "number" && typeof localX === "number" && typeof localY === "number" && typeof localMass === "number")
         {
             // Create new ball, since we dont have other objects yet
             const ball = new Ball(localRadius)
             // Set position giver by the user
             ball.setPosition(localX,localY)
+            // Set mass to the shape give by the user
+            ball.setMass(mass)
             // Add the new object to the list of objects to be updated by the engine
             setObjects(objects => [...objects,ball])
             // Create new tracker window for this ball and add it to the list to display in the DOM
@@ -69,6 +73,8 @@ function ObjectCreator({engineRunning, setEngineRunning, setObjects, updater,set
                         <input type='number' value={xPos} onChange={(e) => setXPos(e.target.value)}  className='Creator_Input'></input>
                         <label>Y Position</label>
                         <input type='number' value={yPos} onChange={(e) => setYPos(e.target.value)}  className='Creator_Input'></input>
+                        <label>Mass</label>
+                        <input type='number' value={mass} onChange={(e) => setMass(e.target.value)}  className='Creator_Input'></input>
                         <button onClick={() => {stopEngine()}}>Create</button>
                     </div>
                 </div>

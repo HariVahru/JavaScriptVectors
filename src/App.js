@@ -11,6 +11,7 @@ import Velocity from './classes/velocity';
 import Engine from './controller/engine';
 import Acceleration from './classes/acceleration';
 import ObjectCreator from './controller/objectCreator';
+import ObjectManipulation from './controller/objectManipulation';
 
 function App() {
 
@@ -42,6 +43,7 @@ function App() {
       <ShapeDrawing shapes={shapes}/>
       <Engine setRunner = {setRunner} objects={shapes} setObjects={setShapes} engineRunning={engineRunning} tickSpeed={tickSpeed} singleTick={runTick} updater={windowUpdater} />
       <ObjectCreator engineRunning={engineRunning} setEngineRunning={runner} setObjects={setShapes} updater={windowUpdater} setUpdater={setWindowUpdater} />
+      <ObjectManipulation objects={shapes} tickSpeed={tickSpeed}/>
       <button onClick={() => setRunTick(value => !value)} >Run test</button>
       <button onClick={() => moveTheCircle()} >Toggle Engine</button>
     </div>

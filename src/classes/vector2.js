@@ -128,6 +128,40 @@ class Vector2
         let newTheta = newRad * 180 / Math.PI
         return new Vector2(newValue,newTheta)
     }
+
+    static addBunchOfVectors(v)
+    {
+        // work out new x and y
+        let newX = v.reduce((accumulator, currentValue) => accumulator + currentValue.getX(), 0)
+        let newY = v.reduce((accumulator, currentValue) => accumulator + currentValue.getY(), 0)
+        // let newX = v1.getX() + v2.getX()
+        // let newY = v1.getY() + v2.getY()
+
+
+        // work out new value 
+        let newValue = Math.sqrt(Math.pow(newX,2)+Math.pow(newY,2))
+
+        // work out new theta
+        let newRad;
+        if (newX >= 0 && newY >= 0)
+        {
+            newRad = Math.asin(newX / newValue)
+        }
+        else if (newX >= 0 && newY < 0)
+        {
+            newRad = Math.abs(Math.asin(newY / newValue)) + (0.5 * Math.PI)
+        }
+        else if (newX < 0 && newY < 0)
+        {
+            newRad = Math.abs(Math.asin(newX / newValue)) + (Math.PI)
+        }
+        else if (newX < 0 && newY >= 0)
+        {
+            newRad = Math.abs(Math.asin(newY / newValue)) + (1.5 * Math.PI)
+        }
+        let newTheta = newRad * 180 / Math.PI
+        return new Vector2(newValue,newTheta)
+    }
 }
 
 export default Vector2
