@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import Draggable from 'react-draggable';
 import '../css/objectTracker.css';
+import pinIcon from "../pin-icon.png";
 
 function ObjectWindow({updater, setUpdate, object}) {
 
@@ -9,6 +10,9 @@ function ObjectWindow({updater, setUpdate, object}) {
   const [shapeRadius,setShapeRadius] = useState(object.getRadius())
   const [shapeX,setShapeX] = useState(object.getPosition().getX())
   const [shapeY,setShapeY] = useState(object.getPosition().getY())
+
+  const [pin,setPin] = useState(false)
+  const pinRef = useRef()
 
   // Local variable which is updated by the engine for the window to pull changes
   const [update,setLocalUpdate] = useState(false)
@@ -28,14 +32,27 @@ function ObjectWindow({updater, setUpdate, object}) {
 
   return (
     <div>
-      <Draggable>
-        <div className='Object_Tracker'>
-          <div><h3>Shape - ID_{shapeId}</h3></div>
-          <div className='Tracker Values'>
-            <div>Radius - [{shapeRadius.toPrecision(6)}] </div>
-            <div>Position - [{shapeX.toPrecision(5)},{shapeY.toPrecision(5)}]</div>
-
+      <Draggable
+        disabled={pin}
+      >
+        <div className='Object_Tracker' ref={pinRef}>
+          <div><h3>Shape - {shapeId}</h3></div>
+          <div className='Tracker_Values'>
+            <table>
+              <td className='Tracker_Heading'>
+                <tr>Radius</tr>
+                <tr>Position</tr>
+                <tr>Mass</tr>
+                <tr>Velocity</tr>
+                <tr>Acceleration</tr>
+              </td>
+              <td className='Tracker_Data'>
+                <tr>[ {shapeRadius.toPrecision(6)} ]</tr>
+                <tr>[ {shapeX.toPrecision(5)},{shapeY.toPrecision(5)} ]</tr>
+              </td>
+            </table>
           </div>
+          <img onClick={() => {setPin(value => !value);if(!pin){pinRef.current.style.backgroundColor = "#7c7c7cbf"}else{pinRef.current.style.backgroundColor = "#ffffff"}}} src={pinIcon}></img>
         </div>
       </Draggable>
     </div>

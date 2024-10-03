@@ -1,12 +1,50 @@
 
 .Object_Tracker
 {
-    width:12vw;
+    width:fit-content;
     border-width: 1px;
     border-style:solid;
-    font-size: 10px;
     border-radius: 20px;
+    font-size: 16px;
     padding: 1%;
     background-color: #ffffff;
-    position:absolute
+    position:absolute;
+    box-shadow: 5px 5px 5px 0px #7c7c7cbf;
+
+    font-family: "Khand", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+
+    resize:horizontal;
+    overflow: hidden;
+
+    min-width:5vw;
+}
+
+.Object_Tracker img
+{
+    top:20%;
+    left:10%;
+    position: absolute;
+    width:3vh;
+    height: 3vh;
+}
+
+.Tracker_Values
+{
+    font-size: 14px;
+    font-family: "Chakra Petch", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+}
+
+.Tracker_Heading
+{
+    text-align: left;
+    padding-right: 1vw;
+}
+
+.Tracker_Data
+{
+    text-align: right;
 }
